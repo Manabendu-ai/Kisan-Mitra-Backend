@@ -2,6 +2,7 @@ package com.kisanmitra.Controllers;
 
 import com.kisanmitra.models.DriverProfile;
 import com.kisanmitra.service.DriverProfileService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api/drivers")
 public class DriverProfileController {
 
-    private final DriverProfileService service;
+    private DriverProfileService service;
 
     public DriverProfileController(DriverProfileService service) {
         this.service = service;

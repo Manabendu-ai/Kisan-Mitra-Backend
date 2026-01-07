@@ -1,14 +1,17 @@
 package com.kisanmitra.models;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.*;
 
-@Embeddable
+@Entity
+@Table(name = "crops_grown")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CropsGrown {
+    @Id
+    @Column(name = "farmer_id")
     private Integer farmerId;
     private String crop;
 }

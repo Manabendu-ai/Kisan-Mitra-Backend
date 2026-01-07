@@ -2,6 +2,8 @@ package com.kisanmitra.Controllers;
 
 import com.kisanmitra.models.BuyerProfile;
 import com.kisanmitra.service.BuyerProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,11 +12,8 @@ import java.util.List;
 @RequestMapping("/api/buyers")
 public class BuyerProfileController {
 
-    private final BuyerProfileService service;
-
-    public BuyerProfileController(BuyerProfileService service) {
-        this.service = service;
-    }
+    @Qualifier("buyerProfileImpl")
+    private BuyerProfileService service;
 
     @PostMapping
     public BuyerProfile create(@RequestBody BuyerProfile buyer) {

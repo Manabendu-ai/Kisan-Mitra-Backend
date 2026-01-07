@@ -2,6 +2,7 @@ package com.kisanmitra.Controllers;
 
 import com.kisanmitra.models.CropsGrown;
 import com.kisanmitra.service.CropsGrownService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,11 +11,8 @@ import java.util.List;
 @RequestMapping("/api/crops")
 public class CropsGrownController {
 
-    private final CropsGrownService service;
-
-    public CropsGrownController(CropsGrownService service) {
-        this.service = service;
-    }
+    @Autowired
+    private CropsGrownService service;
 
     @PostMapping
     public CropsGrown create(@RequestBody CropsGrown crop) {
