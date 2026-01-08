@@ -1,6 +1,7 @@
 package com.kisanmitra.service;
 
 import com.kisanmitra.models.CropsGrown;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

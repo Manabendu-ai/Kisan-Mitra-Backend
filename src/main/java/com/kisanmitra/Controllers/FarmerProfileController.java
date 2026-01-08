@@ -2,6 +2,8 @@ package com.kisanmitra.Controllers;
 
 import com.kisanmitra.models.FarmerProfile;
 import com.kisanmitra.service.FarmerProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,11 +12,9 @@ import java.util.List;
 @RequestMapping("/KisanMitra/farmers")
 public class FarmerProfileController {
 
-    private final FarmerProfileService service;
-
-    public FarmerProfileController(FarmerProfileService service) {
-        this.service = service;
-    }
+    @Qualifier("farmerProfileServiceImpl")
+    @Autowired
+    private FarmerProfileService service;
 
     @PostMapping
     public FarmerProfile create(@RequestBody FarmerProfile farmer) {
