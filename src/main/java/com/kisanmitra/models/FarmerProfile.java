@@ -24,4 +24,5 @@ public class FarmerProfile {
     private String village;
     private String district;
     private String state;
+    private String phone;
 }
