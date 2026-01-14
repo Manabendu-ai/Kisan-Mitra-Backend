@@ -26,7 +26,6 @@ public class OrderController {
         this.listingRepo = listingRepo;
     }
 
-    // Place order
     @PostMapping
     public Order placeOrder(@RequestBody OrderRequest request) {
 
@@ -70,7 +69,6 @@ public class OrderController {
     }
 
 
-    // Buyer order history
     @GetMapping("/buyer/{buyerId}")
     public List<Order> getBuyerOrders(@PathVariable Integer buyerId) {
         return orderRepo.findByBuyer_BuyerId(buyerId);
