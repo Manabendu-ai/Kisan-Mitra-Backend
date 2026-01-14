@@ -11,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 public class BuyerProfile {
 
+
     @Id
     @Column(name = "buyer_id")
     private Integer buyerId;

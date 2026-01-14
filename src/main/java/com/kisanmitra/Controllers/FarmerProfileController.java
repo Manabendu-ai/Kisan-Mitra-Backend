@@ -25,4 +25,10 @@ public class FarmerProfileController {
     public List<FarmerProfile> getAll() {
         return service.getAll();
     }
+
+    @GetMapping("/me")
+    public FarmerProfile getMyProfile(@RequestParam Integer userId) {
+        return (FarmerProfile) service.findByUser_UserId(userId)
+                .orElseThrow(() -> new RuntimeException("Farmer not found"));
+    }
 }
