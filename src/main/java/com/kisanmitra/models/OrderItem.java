@@ -1,12 +1,18 @@
 package com.kisanmitra.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_items")
+@Getter
+@Setter
 public class OrderItem {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -17,6 +23,9 @@ public class OrderItem {
     @JoinColumn(name = "listing_id")
     private FarmerListing listing;
 
-    private Double quantity;
-    private Double price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal quantity;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 }
