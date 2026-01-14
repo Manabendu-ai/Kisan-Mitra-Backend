@@ -1,8 +1,12 @@
 package com.kisanmitra.Controllers;
 
+import com.kisanmitra.dto.OrderItemRequest;
+import com.kisanmitra.dto.OrderRequest;
 import com.kisanmitra.models.*;
 import com.kisanmitra.repositories.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 @RestController
@@ -22,7 +26,6 @@ public class OrderController {
         this.listingRepo = listingRepo;
     }
 
-    // Place order
     @PostMapping
     public Order placeOrder(@RequestBody OrderRequest request) {
 
@@ -36,19 +39,26 @@ public class OrderController {
         order.setDeliveryTime(request.getDeliveryTime());
 
         List<OrderItem> items = new ArrayList<>();
-        double total = 0;
+        BigDecimal total = BigDecimal.ZERO;
 
         for (OrderItemRequest i : request.getItems()) {
+
             FarmerListing listing = listingRepo.findById(i.getListingId())
                     .orElseThrow(() -> new RuntimeException("Listing not found"));
 
             OrderItem item = new OrderItem();
             item.setOrder(order);
             item.setListing(listing);
-            item.setQuantity(i.getQuantity());
-            item.setPrice(listing.getPricePerUnit());
 
-            total += i.getQuantity() * listing.getPricePerUnit();
+            BigDecimal quantity = i.getQuantity();
+            BigDecimal price = listing.getPricePerUnit();
+
+            item.setQuantity(quantity);
+            item.setPrice(price);
+
+            BigDecimal lineTotal = price.multiply(quantity);
+            total = total.add(lineTotal);
+
             items.add(item);
         }
 
@@ -58,7 +68,7 @@ public class OrderController {
         return orderRepo.save(order);
     }
 
-    // Buyer order history
+
     @GetMapping("/buyer/{buyerId}")
     public List<Order> getBuyerOrders(@PathVariable Integer buyerId) {
         return orderRepo.findByBuyer_BuyerId(buyerId);

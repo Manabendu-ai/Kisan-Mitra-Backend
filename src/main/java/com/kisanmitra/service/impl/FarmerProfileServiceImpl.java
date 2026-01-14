@@ -6,6 +6,7 @@ import com.kisanmitra.service.FarmerProfileService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FarmerProfileServiceImpl implements FarmerProfileService {
@@ -22,5 +23,10 @@ public class FarmerProfileServiceImpl implements FarmerProfileService {
 
     public List<FarmerProfile> getAll() {
         return repo.findAll();
+    }
+
+    @Override
+    public Optional<Object> findByUser_UserId(Integer userId) {
+        return Optional.empty();
     }
 }

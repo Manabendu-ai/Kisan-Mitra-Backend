@@ -3,6 +3,9 @@ package com.kisanmitra.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 @Entity
 @Table(name = "farmer_listings")
 @Getter
@@ -14,10 +17,12 @@ public class FarmerListing {
     private Long id;
 
     private String cropName;
-    private Double quantity;
+    private BigDecimal quantity;
     private String unit;
     private String quality;
-    private Double pricePerUnit;
+
+    @Column(name = "price_per_unit", precision = 10, scale = 2)
+    private BigDecimal pricePerUnit;
     private String imageUrl;
     private String status = "active";
 
